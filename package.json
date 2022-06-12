@@ -5,13 +5,19 @@
   "type": "module",
   "scripts": {
     "start": "node ./bin/www.js",
-    "dev": "nodemon ./bin/www.js"
+    "dev": "nodemon -r dotenv/config ./bin/www.js",
+    "createBooksTable":"node -r dotenv/config ./db/scripts/createBooksTable.js",
+    "populateBooksTable":"node -r dotenv/config ./db/scripts/populateBooksTable.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
-    "nodemon": "~2.0.15"
+    "nodemon": "~2.0.15",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
   }
 }

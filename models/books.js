@@ -1,14 +1,29 @@
 import { books, authors } from "../libs/data.js";
+import { pool } from "../db/index.js";
 
-export function getBooks() {
-  return books;
+export async function getBooks() {
+  const booksResult = await pool.query(`SELECT * FROM books`);
+  return booksResult.rows;
 }
 
-export function searchBooksByTitle(searchTerm) {
-  return books.filter(function (book) {
-    return book.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+export async function searchBooksByTitle(searchTerm) {
+  const query = {
+    name:'getBooksByTitile',
+    text: 'SELECT * FROM books WHERE title LIKE %$1%',
+    values: [author],
+  };
+  results = await pool.query(query);
+  return results.rows;
 }
+
+
+// the code which follows is the code that i tried to change to make the searchBooksByTitle works, however it doesn't work, could you please explain why it fails
+
+//   const books = await pool.query(`SELECT * FROM books`)
+//   return books.filter(function (book) {
+//     return book.title.toLowerCase().includes(searchTerm.toLowerCase());
+//   });
+// }
 
 export function searchBooksByAuthor(searchTerm) {
   const authorNamesMatchingSearchTerm = authors.filter(function (author) {
