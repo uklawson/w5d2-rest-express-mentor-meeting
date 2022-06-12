@@ -6,11 +6,11 @@ export async function getBooks() {
   return booksResult.rows;
 }
 
-export async function searchBooksByTitle(searchTerm) {
+export async function searchBooksByTitle(title) {
   const query = {
     name:'getBooksByTitile',
     text: 'SELECT * FROM books WHERE title LIKE %$1%',
-    values: [author],
+    values: [title],
   };
   results = await pool.query(query);
   return results.rows;
